@@ -1,14 +1,12 @@
 package com.ejemplo.tareas.controllers;
 
 import com.ejemplo.tareas.models.User;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,15 +31,21 @@ public class UserController {
 
     @GetMapping("/list")
     public String list(ModelMap model) {
-        List<User> users =List.of(
-                new User("Andrés", "Guzmán", "andres.guzman@gmail.com"),
-                new User("María", "López", "maria.lopez@gmail.com"),
-                new User("Carlos", "Pérez", "carlos.perez@gmail.com")
-        );
-        List<User> usersEmpty = List.of();
         model.addAttribute("title", "Lista de Usuarios");
-        model.addAttribute("users", users);
-        model.addAttribute("usersEmpty", usersEmpty);
         return "list";
+    }
+
+    @ModelAttribute("users")
+    public List<User> usersModel() {
+        return List.of(
+            new User("Andrés", "Guzmán", "andres.guzman@gmail.com"),
+            new User("María", "López", "maria.lopez@gmail.com"),
+            new User("Carlos", "Pérez", "carlos.perez@gmail.com")
+        );
+    }
+
+    @ModelAttribute("usersEmpty")
+    public List<User> usersEmptyModel() {
+        return List.of();
     }
 }
