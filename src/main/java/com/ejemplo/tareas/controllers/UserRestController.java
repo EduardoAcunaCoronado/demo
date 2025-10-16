@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,6 +23,16 @@ public class UserRestController {
         userResponse.setUser(user);
         userResponse.setTitle("Hola Mundo Spring Boot");
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<User>>list() {
+        List<User> users =List.of(
+            new User("Andrés", "Guzmán"),
+            new User("María", "López"),
+            new User("Carlos", "Pérez")
+        );
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/details-map")
