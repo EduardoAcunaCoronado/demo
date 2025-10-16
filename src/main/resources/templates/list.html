@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <h1 th:text="${title}"></h1>
+    <div th:if="${users.size() == 0}" th:text="'No hay usuarios registrados'"
+         style="font-weight: bold; color: #ff0000; margin: 10px 0;"></div>
+
+    <table th:if="${users.size() > 0}" style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
+        <thead>
+        <tr style="background-color: #4CAF50; color: white; text-align: left;">
+            <th style="padding: 10px;">Nombre</th>
+            <th style="padding: 10px;">Apellido</th>
+            <th style="padding: 10px;">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}" style="border-bottom: 1px solid #ddd;">
+            <td style="padding: 10px;" th:text="${user.name}"></td>
+            <td style="padding: 10px;" th:text="${user.lastname}"></td>
+            <td style="padding: 10px;" th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${usersEmpty.size() == 0}" th:text="'No hay usuarios registrados'"
+         style="font-weight: bold; color: #ff0000; margin: 10px 0;"></div>
+
+    <table th:if="${usersEmpty.size() > 0}" style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
+        <thead>
+        <tr style="background-color: #4CAF50; color: white; text-align: left;">
+            <th style="padding: 10px;">Nombre</th>
+            <th style="padding: 10px;">Apellido</th>
+            <th style="padding: 10px;">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${usersEmpty}" style="border-bottom: 1px solid #ddd;">
+            <td style="padding: 10px;" th:text="${user.name}"></td>
+            <td style="padding: 10px;" th:text="${user.lastname}"></td>
+            <td style="padding: 10px;" th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -19,25 +19,15 @@ public class UserRestController {
     @GetMapping("/details")
     public ResponseEntity<UserResponse> details() {
         UserResponse userResponse = new UserResponse();
-        User user = new User("Andrés", "Guzmán");
+        User user = new User("Andrés", "Guzmán", null);
         userResponse.setUser(user);
         userResponse.setTitle("Hola Mundo Spring Boot");
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<User>>list() {
-        List<User> users =List.of(
-            new User("Andrés", "Guzmán"),
-            new User("María", "López"),
-            new User("Carlos", "Pérez")
-        );
-        return ResponseEntity.ok(users);
-    }
-
     @GetMapping("/details-map")
     public Map<String, Object> detailsMap() {
-        User user = new User("Andrés", "Guzmán");
+        User user = new User("Andrés", "Guzmán", null);
         Map<String, Object> body = new HashMap<>();
 
         body.put("title", "Hola Mundo Spring Boot Map");
@@ -45,5 +35,17 @@ public class UserRestController {
 
         return body;
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<User>>list() {
+        List<User> users =List.of(
+            new User("Andrés", "Guzmán", null),
+            new User("María", "López", null),
+            new User("Carlos", "Pérez", null)
+        );
+        return ResponseEntity.ok(users);
+    }
+
+
 
 }
