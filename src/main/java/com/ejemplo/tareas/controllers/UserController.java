@@ -19,7 +19,7 @@ public class UserController {
         return "details";
     }
 
-    @GetMapping("/details/map")
+    @GetMapping("/details-map")
     public String details(Map<String, Object> model) {
         User user = new User("Andrés Map", "Guzmán Map");
         model.put("title", "Hola Mundo Spring Boot Map");
