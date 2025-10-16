@@ -1,5 +1,6 @@
 package com.ejemplo.tareas.controllers;
 
+import com.ejemplo.tareas.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,12 @@ public class UserRestController {
 
     @GetMapping("/details")
     public Map<String, Object> details() {
+        User user = new User("Andrés", "Guzmán");
         Map<String, Object> body = new HashMap<>();
+
         body.put("title", "Hola Mundo Spring Boot Map");
-        body.put("name", "Andrés Map");
-        body.put("lastname", "Guzmán Map");
+        body.put("user", user);
+
         return body;
     }
 

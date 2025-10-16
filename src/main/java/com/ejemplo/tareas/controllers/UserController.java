@@ -1,6 +1,6 @@
 package com.ejemplo.tareas.controllers;
 
-import org.apache.catalina.User;
+import com.ejemplo.tareas.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +13,17 @@ public class UserController {
 
     @GetMapping("/details")
     public String details(Model model) {
+        User user = new User("Andrés", "Guzmán");
         model.addAttribute("title", "Hola Mundo Spring Boot");
-        model.addAttribute("name", "Andrés");
-        model.addAttribute("lastname", "Guzmán");
+        model.addAttribute("user", user);
         return "details";
     }
 
     @GetMapping("/details/map")
     public String details(Map<String, Object> model) {
+        User user = new User("Andrés Map", "Guzmán Map");
         model.put("title", "Hola Mundo Spring Boot Map");
-        model.put("name", "Andrés Map");
-        model.put("lastname", "Guzmán Map");
+        model.put("user", user);
         return "details";
     }
 
