@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,7 +23,25 @@ public class PathVariableController {
     private String code;
 
     @Value("${config.listOfValues}")
-    private String[] listOfValues;
+    private List<String> listOfValues;
+
+    @Value("#{'${config.listOfValues}'.toUpperCase().split(',')}")
+    private List<String> valueList;
+
+    @Value("#{'${config.listOfValues}'.toUpperCase()}")
+    private String valueString;
+
+    @Value("#{${config.valuesMap}}")
+    private Map<String, Object> valuesMap;
+
+    @Value("#{${config.valuesMap}.product}")
+    private String product;
+
+    @Value("#{${config.valuesMap}.description}")
+    private String description;
+
+    @Value("#{${config.valuesMap}.price}")
+    private Long price;
 
     @GetMapping("/baz/{message}")
     public ResponseEntity<ParamResponse> baz(@PathVariable String message) {
@@ -48,6 +66,12 @@ public class PathVariableController {
         map.put("code", code);
         map.put("message", message);
         map.put("listOfValues", listOfValues);
+        map.put("valueList", valueList);
+        map.put("valueString", valueString);
+        map.put("valuesMap", valuesMap);
+        map.put("product", product);
+        map.put("description", description);
+        map.put("price", price);
         return map;
     }
 
