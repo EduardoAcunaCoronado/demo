@@ -1,7 +1,9 @@
 package com.ejemplo.tareas.controllers;
 
 import com.ejemplo.tareas.dto.ParamResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/var")
@@ -43,6 +46,9 @@ public class PathVariableController {
     @Value("#{${config.valuesMap}.price}")
     private Long price;
 
+    @Autowired
+    private Environment environment;
+
     @GetMapping("/baz/{message}")
     public ResponseEntity<ParamResponse> baz(@PathVariable String message) {
         ParamResponse paramResponse = new ParamResponse();
@@ -64,7 +70,10 @@ public class PathVariableController {
         Map<String, Object> map = new HashMap<>();
         map.put("username",  username);
         map.put("code", code);
+        map.put("code2", Integer.valueOf(Objects.requireNonNull(environment.getProperty("config.code"))));
+        map.put("code3", environment.getProperty("config.code", Long.class));
         map.put("message", message);
+        map.put("message2", environment.getProperty("config.message"));
         map.put("listOfValues", listOfValues);
         map.put("valueList", valueList);
         map.put("valueString", valueString);
